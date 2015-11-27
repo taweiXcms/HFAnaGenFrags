@@ -1,0 +1,13 @@
+Put this Bmeson folder under your CMSSWXXX/src
+Then do the following driver command
+
+step1:
+cmsDriver.py Bmeson/fragmentfile/python/Pyquen_BuKp_Unquenched_2760GeV_cfi.py --filein dbs:/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/HiFall13-STARTHI53_V28-v2/GEN-SIM --fileout file:SIM.root --eventcontent RAWDEBUG --datatier GEN-SIM --step GEN,SIM --processName HISIGNAL --conditions STARTHI53_LV1::All --beamspot MatchHI --himix --scenario HeavyIons --no_exec
+cmsDriver.py Bmeson/fragmentfile/python/Pyquen_BdKstar_Unquenched_2760GeV_cfi.py --filein dbs:/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/HiFall13-STARTHI53_V28-v2/GEN-SIM --fileout file:SIM.root --eventcontent RAWDEBUG --datatier GEN-SIM --step GEN,SIM --processName HISIGNAL --conditions STARTHI53_LV1::All --beamspot MatchHI --himix --scenario HeavyIons --no_exec
+cmsDriver.py Bmeson/fragmentfile/python/Pyquen_BsPhi_Unquenched_2760GeV_cfi.py --filein dbs:/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/HiFall13-STARTHI53_V28-v2/GEN-SIM --fileout file:SIM.root --eventcontent RAWDEBUG --datatier GEN-SIM --step GEN,SIM --processName HISIGNAL --conditions STARTHI53_LV1::All --beamspot MatchHI --himix --scenario HeavyIons --no_exec
+
+step2:
+cmsDriver.py step1 --filein file:SIM.root --fileout file:RAW.root --eventcontent RAWDEBUG --datatier GEN-SIM-RAW --step DIGI,L1,DIGI2RAW,HLT:HIon,RAW2DIGI,L1Reco --conditions STARTHI53_LV1::All --himix --scenario HeavyIons --no_exec
+
+step3:
+cmsDriver.py step2 --filein file:RAW.root --fileout file:RECO.root --eventcontent RECODEBUG --datatier GEN-SIM-RECO --step RAW2DIGI,L1Reco,RECO --conditions STARTHI53_LV1::All --himix --scenario HeavyIons --no_exec

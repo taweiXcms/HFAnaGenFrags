@@ -1,0 +1,9 @@
+for CMSSW_5_3_20
+note: auto:mc will induce HLT problem.
+cmsDriver.py Bmeson/fragmentfile/python/Pythia_BuKp_2760GeV_cfi.py  --processName HISIGNAL --conditions STARTHI53_LV1::All --scenario HeavyIons --eventcontent RAWDEBUG -s GEN,SIM --datatier GEN-SIM --beamspot RealisticHI2011Collision --no_exec
+
+step2:
+cmsDriver.py step2 --filein file:Pythia_BuKp_2760GeV_cfi_py_GEN_SIM.root --eventcontent RAWDEBUG --datatier GEN-SIM-RAW --step DIGI,L1,DIGI2RAW,HLT:HIon,RAW2DIGI,L1Reco --conditions STARTHI53_LV1::All --scenario HeavyIons --no_exec
+
+step3:
+cmsDriver.py step3 --filein file:step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco.root --eventcontent RECODEBUG --datatier GEN-SIM-RECO --step RAW2DIGI,L1Reco,RECO --conditions STARTHI53_LV1::All --scenario HeavyIons --no_exec

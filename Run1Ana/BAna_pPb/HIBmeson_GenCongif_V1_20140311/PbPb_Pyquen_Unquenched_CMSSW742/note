@@ -1,0 +1,19 @@
+cmsDriver.py Bmeson/fragmentfile/python/Pyquen_BuKp_Unquenched_2760GeV_cfi.py \
+--conditions auto:run1_mc_hi --scenario HeavyIons  --eventcontent RAWSIM -s GEN,SIM --datatier GEN-SIM --no_exec \
+--pileup_input das:/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/HiFall13-STARTHI53_V28-v2/GEN-SIM \
+--pileup HiMixGEN \
+-n 1 \
+--beamspot MatchHI
+
+cmsDriver.py step2  --conditions auto:run1_mc_hi --scenario HeavyIons --eventcontent RAWSIM -s DIGI:pdigi_valid,L1,DIGI2RAW,RAW2DIGI,L1Reco --datatier GEN-SIM-DIGI-RAW --beamspot RealisticHI2011Collision --no_exec --filein file:Pyquen_BuKp_Unquenched_2760GeV_cfi_py_GEN_SIM_PU.root -n -1 \
+--pileup_input das:/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/HiFall13-STARTHI53_V28-v2/GEN-SIM \
+--pileup HiMix
+
+cmsDriver.py step3  --conditions auto:run1_mc_hi -s RAW2DIGI,L1Reco,RECO --eventcontent RECOSIM --scenario HeavyIons --datatier GEN-SIM-RECO --beamspot RealisticHI2011Collision --no_exec --filein file:step2_DIGI_L1_DIGI2RAW_RAW2DIGI_L1Reco_PU.root -n -1 --no_exec \
+--pileup_input das:/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/HiFall13-STARTHI53_V28-v2/GEN-SIM \
+--pileup HiMix
+
+
+Remember to comment the input fileList and add the following.
+from embedded_fileLists_2011PbPb.fileLists.fileList_cff import readFiles
+process.mix.input.fileNames = readFiles
