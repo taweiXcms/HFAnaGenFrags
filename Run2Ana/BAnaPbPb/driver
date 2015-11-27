@@ -1,5 +1,5 @@
-Workflow:
-Use CMSSW_7_5_5_patch1 or later
+CMSSW_7_5_4 + git cms-merge-topic 10839, 12247, 12215
+Or use CMSSW_7_5_5_patch1 or later
 
 GEN-SIM + embedding
 cmsDriver.py BmesonBPH/fragmentfile/python/Pythia8_BuToJpsiK_TuneCUEP8M1_5020GeV_BPHMod_filter_cfi.py \
