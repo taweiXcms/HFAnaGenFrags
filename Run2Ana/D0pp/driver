@@ -1,0 +1,8 @@
+cmsDriver.py Dmeson/fragmentfile/python/Pythia_D0pt35p0_Pthat35_TuneZ2_5020GeV_cfi.py \
+--mc --eventcontent RAWSIM --datatier GEN-SIM --conditions auto:run2_mc --beamspot Nominal5TeVpp2015Collision --step GEN,SIM --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 --magField 38T_PostLS1 --no_exec
+
+cmsDriver.py step2 --datatier GEN-SIM-DIGI-RAW-HLTDEBUG --conditions 74X_mcRun2_asymptotic_ppAt5TeV_v0 -s DIGI:pdigi_valid,L1,DIGI2RAW,HLT:@fake,RAW2DIGI,L1Reco --eventcontent FEVTDEBUGHLT --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 \
+--no_exec --filein file:Pythia_D0pt35p0_Pthat35_TuneZ2_5020GeV_cfi_py_GEN_SIM.root
+
+cmsDriver.py step3 --conditions 75X_mcRun2_asymptotic_ppAt5TeV_v0 -s RAW2DIGI,L1Reco,RECO --eventcontent FEVTDEBUGHLT --datatier GEN-SIM-RECO --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 \
+--no_exec --filein file:step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco.root
