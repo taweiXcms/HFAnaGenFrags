@@ -23,7 +23,7 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
         pythia8CUEP8M1SettingsBlock,
         processParameters = cms.vstring(     
             'HardQCD:all = on',
-            'PhaseSpace:pTHatMin = 50.', #min pthat
+            'PhaseSpace:pTHatMin = 15.', #min pthat
         ),
         parameterSets = cms.vstring(
             'pythia8CommonSettings',
@@ -36,37 +36,21 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
 generator.PythiaParameters.processParameters.extend(EvtGenExtraParticles)
 
 partonfilter = cms.EDFilter("PythiaFilter",
-    ParticleID = cms.untracked.int32(4) # 4 for prompt D0 and 5 for non-prompt D0
+    ParticleID = cms.untracked.int32(5) # 4 for prompt D0 and 5 for non-prompt D0
 	)
-##or
-#partonfilter = cms.EDFilter("MCSingleParticleFilter",
-#                       MaxEta     = cms.untracked.vdouble(999.0, 999.0),
-#                       MinEta     = cms.untracked.vdouble(-999.0, -999.0),
-#                       MinPt      = cms.untracked.vdouble(0.0, 0.0),
-#                       ParticleID = cms.untracked.vint32(4, -4)
-#                       )
-#
-
-Dfilter = cms.EDFilter("MCSingleParticleFilter",
-    MaxEta = cms.untracked.vdouble(2.4, 2.4),
-    MinEta = cms.untracked.vdouble(-2.4, -2.4),
-    MinPt = cms.untracked.vdouble(50.0, 50.0), #min pt
-    ParticleID = cms.untracked.vint32(421, -421)
-)
 
 D0Daufilter = cms.EDFilter("PythiaDauVFilterPtFilter",
     MotherID = cms.untracked.int32(0),
     ParticleID = cms.untracked.int32(421),
+    ParticlePt = cms.untracked.double(15.),
+    ParticleMaxEta = cms.untracked.double(2.4),
+    ParticleMinEta = cms.untracked.double(-2.4),
     DaughterIDs = cms.untracked.vint32(-321, 211),
     verbose = cms.untracked.int32(0),
     MinPt = cms.untracked.vdouble(0.0, 0.0),
     MaxEta = cms.untracked.vdouble(9999, 9999),
     MinEta = cms.untracked.vdouble(-9999, -9999),
     NumberDaughters = cms.untracked.int32(2),
-    ParticlePt = cms.untracked.double(50.),
-    ParticleMaxEta = cms.untracked.double(2.4),
-    ParticleMinEta = cms.untracked.double(-2.4),
 )
 
-#ProductionFilterSequence = cms.Sequence(generator*partonfilter*Dfilter)
-ProductionFilterSequence = cms.Sequence(generator*Dfilter*D0Daufilter)
+ProductionFilterSequence = cms.Sequence(generator*partonfilter*D0Daufilter)
