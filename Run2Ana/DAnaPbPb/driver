@@ -1,5 +1,7 @@
-CMSSW_7_5_8 + PythiaMomDauFilter.cc
+driver command for private production
 
+PbPb GEN-SIM:
+CMSSW_7_5_8 + PythiaMomDauFilter.cc
 cmsDriver.py Run2Ana/DAnaPbPb/python/Pythia8_nonprompt_D0pt0p0_Pthat0_TuneCUETP8M1_5020GeV_cfi_evtgen130.py \
 --conditions auto:run2_mc_HIon \
 -s GEN,SIM \
@@ -11,20 +13,23 @@ cmsDriver.py Run2Ana/DAnaPbPb/python/Pythia8_nonprompt_D0pt0p0_Pthat0_TuneCUETP8
 --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI \
 --no_exec
 
-cmsDriver.py step2 \
---conditions auto:run2_mc_HIon --scenario HeavyIons \
---pileup_input das:/Hydjet_Quenched_MinBias_5020GeV_750/HiFall15-75X_mcRun2_HeavyIon_v1_75X_mcRun2_HeavyIon_v1-v1/GEN-SIM \
---pileup_dasoption "--limit 0" \
--n -1 --eventcontent RAWSIM \
--s DIGI:pdigi_valid,L1,DIGI2RAW,HLT:HIon,RAW2DIGI,L1Reco \
---datatier GEN-SIM-DIGI-RAW \
---pileup HiMix --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI \
---no_exec
+PbPb embedded DIGI:
+CMSSW_7_5_8_patch1
+cmsDriver.py step2 --conditions 75X_mcRun2_HeavyIon_v12 --scenario HeavyIons --pileup_input das:/RelValHydjetQ_MinBias_5020GeV/CMSSW_7_5_0-75X_mcRun2_HeavyIon_v1-v2/GEN-SIM --eventcontent RAWSIM -s DIGI:pdigi_hi,L1,DIGI2RAW,HLT:HIon,RAW2DIGI,L1Reco --datatier GEN-SIM-DIGI-RAW-HLTDEBUG --pileup HiMix --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI -n 1 --no_exec --pileup_dasoption "--limit 0"
 
-cmsDriver.py step3 \
---conditions auto:run2_mc_HIon -s RAW2DIGI,L1Reco,RECO \
--n -1 --eventcontent RECOSIM \
---scenario HeavyIons \
---datatier GEN-SIM-RECO \
---customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI \
---no_exec
+PbPb RECO:
+CMSSW_7_5_8_patch1
+cmsDriver.py step3 --conditions 75X_mcRun2_HeavyIon_v12 --scenario HeavyIons --eventcontent AODSIM -s RAW2DIGI,L1Reco,RECO --datatier GEN-SIM-RECO --customise=SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI -n 1 --no_exec
+
+pp GEN-SIM:
+CMSSW_7_1_20_patch3
+cmsDriver.py Run2Ana/DstarPbPb/python/Pythia8D0kpi_Dstarpt5p0_Pthat5_TuneCUETP8M1_5020GeV.py \
+--mc --eventcontent RAWSIM --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 --datatier GEN-SIM --conditions MCRUN2_71_V3::All --beamspot Nominal5TeVpp2015Collision --step GEN,SIM --magField 38T_PostLS1 --no_exec
+
+pp DIGI:
+CMSSW_7_5_8_patch1
+cmsDriver.py step2 --conditions 75X_mcRun2_asymptotic_ppAt5TeV_v3  --pileup_input das:/MinBias_TuneCUETP8M1_5p02TeV-pythia8/pp502Fall15-MCRUN2_71_V1-v1/GEN-SIM --eventcontent RAWSIM -s DIGI,L1,DIGI2RAW,HLT:PRef,RAW2DIGI,L1Reco --datatier GEN-SIM--RAW --pileup pp5TeV_Poisson_1p5 --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 -n 1 --no_exec --pileup_dasoption "--limit 0"
+
+pp RECO:
+CMSSW_7_5_8_patch1
+cmsDriver.py step3 --conditions 75X_mcRun2_asymptotic_ppAt5TeV_v3 --eventcontent AODSIM -s RAW2DIGI,L1Reco,RECO --datatier GEN-SIM-RECO --customise=SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 -n 1 --no_exec
