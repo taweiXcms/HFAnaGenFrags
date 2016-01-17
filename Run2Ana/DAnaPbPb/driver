@@ -1,0 +1,30 @@
+CMSSW_7_5_8 + PythiaMomDauFilter.cc
+
+cmsDriver.py Run2Ana/DAnaPbPb/python/Pythia8_nonprompt_D0pt0p0_Pthat0_TuneCUETP8M1_5020GeV_cfi_evtgen130.py \
+--conditions auto:run2_mc_HIon \
+-s GEN,SIM \
+--pileup_input das:/Hydjet_Quenched_MinBias_5020GeV_750/HiFall15-75X_mcRun2_HeavyIon_v1_75X_mcRun2_HeavyIon_v1-v1/GEN-SIM \
+--pileup_dasoption "--limit 0" \
+-n 50000 --era Run2_HI \
+--eventcontent RAWSIM --scenario HeavyIons \
+--pileup HiMixGEN --datatier GEN-SIM --beamspot MatchHI \
+--customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI \
+--no_exec
+
+cmsDriver.py step2 \
+--conditions auto:run2_mc_HIon --scenario HeavyIons \
+--pileup_input das:/Hydjet_Quenched_MinBias_5020GeV_750/HiFall15-75X_mcRun2_HeavyIon_v1_75X_mcRun2_HeavyIon_v1-v1/GEN-SIM \
+--pileup_dasoption "--limit 0" \
+-n -1 --eventcontent RAWSIM \
+-s DIGI:pdigi_valid,L1,DIGI2RAW,HLT:HIon,RAW2DIGI,L1Reco \
+--datatier GEN-SIM-DIGI-RAW \
+--pileup HiMix --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI \
+--no_exec
+
+cmsDriver.py step3 \
+--conditions auto:run2_mc_HIon -s RAW2DIGI,L1Reco,RECO \
+-n -1 --eventcontent RECOSIM \
+--scenario HeavyIons \
+--datatier GEN-SIM-RECO \
+--customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI \
+--no_exec
