@@ -1,0 +1,41 @@
+PbPb should be done in version after CMSSW_7_5_8_patch3
+
+PbPb GEN-SIM
+--conditions 75X_mcRun2_HeavyIon_v13 \
+-s GEN,SIM \
+--pileup_input "das:/Hydjet_Quenched_MinBias_5020GeV_750/HiFall15-75X_mcRun2_HeavyIon_v1_75X_mcRun2_HeavyIon_v1-v1/GEN-SIM" \
+--pileup_dasoption "--limit 0" \
+-n 15000 \
+--eventcontent RAWSIM --scenario HeavyIons \
+--pileup HiMixGEN --datatier GEN-SIM --beamspot MatchHI \
+--customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI \
+--no_exec
+
+PbPb embedded DIGI:
+cmsDriver.py step2 --conditions 75X_mcRun2_HeavyIon_v13 --scenario HeavyIons --pileup_input das:/Hydjet_Quenched_MinBias_5020GeV_750/HiFall15-75X_mcRun2_HeavyIon_v1_75X_mcRun2_HeavyIon_v1-v1/GEN-SIM --eventcontent RAWSIM -s DIGI:pdigi_hi,L1,DIGI2RAW,HLT:HIon,RAW2DIGI,L1Reco --datatier GEN-SIM-DIGI-RAW-HLTDEBUG --pileup HiMix --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI -n 1 --no_exec --pileup_dasoption "--limit 0"
+
+PbPb RECO:
+cmsDriver.py step3 --conditions 75X_mcRun2_HeavyIon_v13 --scenario HeavyIons --eventcontent AODSIM -s RAW2DIGI,L1Reco,RECO --datatier GEN-SIM-RECO --customise=SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI -n 1 --no_exec
+
+#############
+
+pp GEN-SIM was done in 7120patch3
+pp DIGI and RECO were in CMSSW_7_5_8_patch3
+
+pp GEN-SIM  
+--conditions MCRUN2_71_V1::All \
+-s GEN,SIM \
+-n 150000 \
+--eventcontent RAWSIM --datatier GEN-SIM --beamspot Nominal5TeVpp2015Collision \
+--customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 \
+--magField 38T_PostLS1 \
+--no_exec \
+
+pp DIGI:
+cmsDriver.py step2 --conditions 75X_mcRun2_asymptotic_ppAt5TeV_v3  --pileup_input das:/MinBias_TuneCUETP8M1_5p02TeV-pythia8/pp502Fall15-MCRUN2_71_V1-v1/GEN-SIM --eventcontent RAWSIM -s DIGI,L1,DIGI2RAW,HLT:PRef,RAW2DIGI,L1Reco --datatier GEN-SIM-RAW --pileup pp5TeV_Poisson_1p5 --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 -n 1 --no_exec --pileup_dasoption "--limit 0"
+
+pp DIGI no PU
+cmsDriver.py step2 --conditions 75X_mcRun2_asymptotic_ppAt5TeV_v3 --eventcontent RAWSIM -s DIGI,L1,DIGI2RAW,HLT:PRef,RAW2DIGI,L1Reco --datatier GEN-SIM-RAW --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 -n 1 --no_exec
+
+pp RECO:
+cmsDriver.py step3 --conditions 75X_mcRun2_asymptotic_ppAt5TeV_v3 --eventcontent AODSIM -s RAW2DIGI,L1Reco,RECO --datatier GEN-SIM-RECO --customise=SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 -n 1 --no_exec
