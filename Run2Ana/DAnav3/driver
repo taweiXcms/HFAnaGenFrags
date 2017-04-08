@@ -1,0 +1,26 @@
+
+cmsDriver.py Run2Ana/DAnav3/python/NonPrD0_pThat-0_pT-0_pp_5p02-Pythia8.py \ 
+cmsDriver.py Run2Ana/DAnav3/python/NonPrD0_pThat-0_pT-2_pp_5p02-Pythia8.py \ 
+cmsDriver.py Run2Ana/DAnav3/python/NonPrD0_pThat-0_pT-4_pp_5p02-Pythia8.py \ 
+cmsDriver.py Run2Ana/DAnav3/python/NonPrD0_pThat-4_pT-10_pp_5p02-Pythia8.py \ 
+cmsDriver.py Run2Ana/DAnav3/python/NonPrD0_pThat-10_pT-20_pp_5p02-Pythia8.py \ 
+cmsDriver.py Run2Ana/DAnav3/python/NonPrD0_pThat-20_pT-40_pp_5p02-Pythia8.py \ 
+cmsDriver.py Run2Ana/DAnav3/python/NonPrD0_pThat-30_pT-60_pp_5p02-Pythia8.py \ 
+
+pp GEN-SIM CMSSW_7_1_25_patch5
+-n 150000 \
+--mc --eventcontent RAWSIM --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 --datatier GEN-SIM --conditions MCRUN2_71_V1::All --beamspot Nominal5TeVpp2015Collision --step GEN,SIM --magField 38T_PostLS1 --no_exec
+
+pp DR CMSSW_7_5_8_patch6
+cmsDriver.py step1 --fileout file:HIN-HINppWinter16DR-00145_step1.root --pileup_input "dbs:/MinBias_TuneCUETP8M1_5p02TeV-pythia8/pp502Fall15-MCRUN2_71_V1-v1/GEN-SIM" --mc --eventcontent RAWSIM --pileup pp5TeV_Poisson_1p5 --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 --datatier GEN-SIM-RAW --conditions 75X_mcRun2_asymptotic_ppAt5TeV_v3 --step DIGI,L1,DIGI2RAW,HLT:PRef
+
+cmsDriver.py step2 --filein file:HIN-HINppWinter16DR-00145_step1.root --fileout file:HIN-HINppWinter16DR-00145.root --mc --eventcontent AODSIM --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1 --datatier AODSIM --conditions 75X_mcRun2_asymptotic_ppAt5TeV_v3 --step RAW2DIGI,L1Reco,RECO 
+
+
+PbPb GEN-SIM,DR CMSSW_7_5_8_patch7
+cmsDriver.py Configuration/GenProduction/python/HIN-HiFall15-00224-fragment.py --fileout file:HIN-HiFall15-00224.root --pileup_input "dbs:/Hydjet_Quenched_Cymbal5Ev8_PbPbMinBias_5020GeV/HiFall15-75X_mcRun2_HeavyIon_v14_75X_mcRun2_HeavyIon_v14-v1/GEN-SIM" --mc --eventcontent RAWSIM --pileup HiMixGEN --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI --datatier GEN-SIM --conditions 75X_mcRun2_HeavyIon_v14 --beamspot MatchHI --step GEN,SIM --scenario HeavyIons 
+
+cmsDriver.py step1 --fileout file:HIN-HINPbPbWinter16DR-00228_step1.root --pileup_input "dbs:/Hydjet_Quenched_Cymbal5Ev8_PbPbMinBias_5020GeV/HiFall15-75X_mcRun2_HeavyIon_v14_75X_mcRun2_HeavyIon_v14-v1/GEN-SIM" --mc --eventcontent RAWSIM --pileup HiMix --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI --datatier GEN-SIM-RAW --conditions 75X_mcRun2_HeavyIon_v14 --step DIGI:pdigi_hi,L1,DIGI2RAW,HLT:HIon --scenario HeavyIons
+
+cmsDriver.py step2 --filein file:HIN-HINPbPbWinter16DR-00228_step1.root --fileout file:HIN-HINPbPbWinter16DR-00228.root --mc --eventcontent AODSIM --customise SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1_HI --datatier AODSIM --conditions 75X_mcRun2_HeavyIon_v14 --step RAW2DIGI,L1Reco,RECO --scenario HeavyIons 
+
