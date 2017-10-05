@@ -5,7 +5,8 @@ cmsDriver.py Run2017pp502/DAna2017pp502/python/Pythia8_prompt_D0pt0p0_Pthat20_Tu
 cmsDriver.py Run2017pp502/DAna2017pp502/python/Pythia8_prompt_D0pt0p0_Pthat50_TuneCUETP8M1_5020GeV_cfi_evtgen130.py \
 cmsDriver.py Run2017pp502/DAna2017pp502/python/Pythia8_prompt_D0pt0p0_Pthat100_TuneCUETP8M1_5020GeV_cfi_evtgen130.py \
 
---conditions auto:phase1_2017_realistic -n 1000000 --era Run2_2017 --eventcontent RAWSIM  -s GEN,SIM --datatier GEN-SIM --beamspot Realistic25ns13TeVEarly2017Collision --no_exec
+updated drivers command: 
+--mc --eventcontent RAWSIM --geometry DB:Extended --datatier GEN-SIM --conditions 92X_upgrade2017_realistic_v10 --era Run2_2017 --beamspot Realistic25ns13TeVEarly2017Collision --step GEN,SIM --no_exec 
 
-cmsDriver.py step2  --conditions auto:phase1_2017_realistic -n -1 -s DIGI:pdigi_valid,L1,DIGI2RAW,HLT:@fake --datatier GEN-SIM-DIGI-RAW  --era Run2_2017 --eventcontent RAWSIM --no_exec
-cmsDriver.py step3  --conditions auto:phase1_2017_realistic -n -1 --era Run2_2017 --eventcontent AODSIM  -s RAW2DIGI,L1Reco,RECO --no_exec
+cmsDriver.py step2_pp --mc --conditions 92X_upgrade2017_realistic_v11 -s DIGI:pdigi_valid,L1,DIGI2RAW,HLT:@fake --geometry DB:Extended --datatier GEN-SIM-DIGI-RAW --geometry DB:Extended --era Run2_2017 --eventcontent RAWSIM --no_exec 
+cmsDriver.py step3_pp --mc --conditions 92X_upgrade2017_realistic_v11 -s RAW2DIGI,L1Reco,RECO --datatier GEN-SIM-RECO --geometry DB:Extended --era Run2_2017 --eventcontent AODSIM --no_exec 

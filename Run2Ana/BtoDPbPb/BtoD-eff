@@ -1,0 +1,62 @@
+Pythia8_BuToD0Pi_Bpt0p0_Pthat0_TuneCUEP8M1_5020GeV_py_GEN_SIM.py
+Before Filtrer: total cross section = 1.009e+12 +- 1.609e+08 pb
+Filter efficiency (taking into account weights)= (1045) / (1e+07) = 1.045e-04 +- 3.232e-06
+Filter efficiency (event-level)= (1045) / (1e+07) = 1.045e-04 +- 3.232e-06
+After filter: final cross section = 1.054e+08 +- 3.261e+06 pb
+real    874m34.728s
+user    855m26.489s
+sys     5m5.963s
+
+Pythia8_BuToD0Pi_Bpt0p0_Pthat2_TuneCUEP8M1_5020GeV_py_GEN_SIM.py
+Before Filtrer: total cross section = 3.312e+11 +- 8.329e+07 pb
+Filter efficiency (taking into account weights)= (1501) / (4.88952e+06) = 3.070e-04 +- 7.922e-06
+Filter efficiency (event-level)= (1501) / (4.88952e+06) = 3.070e-04 +- 7.922e-06
+After filter: final cross section = 1.017e+08 +- 2.624e+06 pb
+real    877m22.647s
+user    850m35.520s
+sys     6m45.273s
+
+Pythia8_BuToD0Pi_Bpt0p0_Pthat5_TuneCUEP8M1_5020GeV_py_GEN_SIM.py
+Before Filtrer: total cross section = 2.420e+10 +- 1.430e+07 pb
+Filter efficiency (taking into account weights)= (2946) / (902388) = 3.265e-03 +- 6.005e-05
+Filter efficiency (event-level)= (2946) / (902388) = 3.265e-03 +- 6.005e-05
+After filter: final cross section = 7.899e+07 +- 1.454e+06 pb
+real    877m29.482s
+user    856m3.118s
+sys     10m42.036s
+
+Pythia8_BuToD0Pi_Bpt0p0_Pthat10_TuneCUEP8M1_5020GeV_py_GEN_SIM.py
+Before Filtrer: total cross section = 2.314e+09 +- 2.142e+06 pb
+Filter efficiency (taking into account weights)= (3510) / (361260) = 9.716e-03 +- 1.632e-04
+Filter efficiency (event-level)= (3510) / (361260) = 9.716e-03 +- 1.632e-04
+After filter: final cross section = 2.248e+07 +- 3.782e+05 pb
+real    881m37.658s
+user    868m0.861s
+sys     8m32.680s
+
+Pythia8_BuToD0Pi_Bpt0p0_Pthat15_TuneCUEP8M1_5020GeV_py_GEN_SIM.py
+Before Filtrer: total cross section = 5.242e+08 +- 5.851e+05 pb
+Filter efficiency (taking into account weights)= (3463) / (244432) = 1.417e-02 +- 2.390e-04
+Filter efficiency (event-level)= (3463) / (244432) = 1.417e-02 +- 2.390e-04
+After filter: final cross section = 7.427e+06 +- 1.256e+05 pb
+real    875m2.265s
+user    854m26.673s
+sys     9m14.832s
+
+Pythia8_BuToD0Pi_Bpt0p0_Pthat30_TuneCUEP8M1_5020GeV_py_GEN_SIM.py
+Before Filtrer: total cross section = 3.470e+07 +- 4.901e+04 pb
+Filter efficiency (taking into account weights)= (3204) / (141403) = 2.266e-02 +- 3.957e-04
+Filter efficiency (event-level)= (3204) / (141403) = 2.266e-02 +- 3.957e-04
+After filter: final cross section = 7.863e+05 +- 1.378e+04 pb
+real    878m12.873s
+user    852m34.304s
+sys     9m22.611s
+
+Pythia8_BuToD0Pi_Bpt0p0_Pthat50_TuneCUEP8M1_5020GeV_py_GEN_SIM.py
+Before Filtrer: total cross section = 4.023e+06 +- 6.552e+03 pb
+Filter efficiency (taking into account weights)= (2980) / (103307) = 2.885e-02 +- 5.207e-04
+Filter efficiency (event-level)= (2980) / (103307) = 2.885e-02 +- 5.207e-04
+After filter: final cross section = 1.161e+05 +- 2.104e+03 pb
+real    878m52.154s
+user    835m48.493s
+sys     11m27.895s
