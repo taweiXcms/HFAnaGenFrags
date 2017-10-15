@@ -25,7 +25,7 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
         pythia8CUEP8M1SettingsBlock,
         processParameters = cms.vstring(            
             'HardQCD:all = on',
-            'PhaseSpace:pTHatMin = 10.',
+            'PhaseSpace:pTHatMin = 0.',
           
             ),
         parameterSets = cms.vstring('pythia8CommonSettings',

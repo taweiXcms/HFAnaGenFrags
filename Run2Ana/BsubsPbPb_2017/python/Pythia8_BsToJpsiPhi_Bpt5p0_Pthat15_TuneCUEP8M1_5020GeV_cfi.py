@@ -25,7 +25,7 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
         pythia8CUEP8M1SettingsBlock,
         processParameters = cms.vstring(            
             'HardQCD:all = on',
-            'PhaseSpace:pTHatMin = 10.',
+            'PhaseSpace:pTHatMin = 15.',
           
             ),
         parameterSets = cms.vstring('pythia8CommonSettings',
@@ -40,32 +40,43 @@ generator.PythiaParameters.processParameters.extend(EvtGenExtraParticles)
 ###########
 # Filters #
 ###########
+mumugenfilter = cms.EDFilter("MCParticlePairFilter",
+    Status = cms.untracked.vint32(1, 1),
+    MinPt = cms.untracked.vdouble(0.5, 0.5),
+    MinP = cms.untracked.vdouble(0., 0.),
+    MaxEta = cms.untracked.vdouble(2.5, 2.5),
+    MinEta = cms.untracked.vdouble(-2.5, -2.5),
+    MinInvMass = cms.untracked.double(2.0),
+    MaxInvMass = cms.untracked.double(4.0),
+    ParticleCharge = cms.untracked.int32(-1),
+    ParticleID1 = cms.untracked.vint32(13),
+    ParticleID2 = cms.untracked.vint32(13)
+)
+
 BJpsiDaufilter = cms.EDFilter("PythiaMomDauFilter",
     ParticleID = cms.untracked.int32(531),
     MomMinPt = cms.untracked.double(5.),
-    MomMinEta = cms.untracked.double(-2.8),
-    MomMaxEta = cms.untracked.double(2.8),
+    MomMinEta = cms.untracked.double(-2.4),
+    MomMaxEta = cms.untracked.double(2.4),
     DaughterIDs = cms.untracked.vint32(443, 333),
     NumberDaughters = cms.untracked.int32(2),
     DaughterID = cms.untracked.int32(443),
     DescendantsIDs = cms.untracked.vint32(13, -13),
     NumberDescendants = cms.untracked.int32(2),
-    MinEta = cms.untracked.double(-10000.0),
-    MaxEta = cms.untracked.double(10000.0),
+    MinEta = cms.untracked.double(-2.5),
+    MaxEta = cms.untracked.double(2.5),
 )
 
 BPhiDaufilter = cms.EDFilter("PythiaMomDauFilter",
     ParticleID = cms.untracked.int32(531),
     MomMinPt = cms.untracked.double(5.),
-    MomMinEta = cms.untracked.double(-2.8),
-    MomMaxEta = cms.untracked.double(2.8),
+    MomMinEta = cms.untracked.double(-2.4),
+    MomMaxEta = cms.untracked.double(2.4),
     DaughterIDs = cms.untracked.vint32(443, 333),
     NumberDaughters = cms.untracked.int32(2),
     DaughterID = cms.untracked.int32(333),
     DescendantsIDs = cms.untracked.vint32(321, -321),
     NumberDescendants = cms.untracked.int32(2),
-    MinEta = cms.untracked.double(-10000.0),
-    MaxEta = cms.untracked.double(10000.0),
 )
 
-ProductionFilterSequence = cms.Sequence(generator*BJpsiDaufilter*BPhiDaufilter)
+ProductionFilterSequence = cms.Sequence(generator*mumugenfilter*BJpsiDaufilter*BPhiDaufilter)
