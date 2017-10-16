@@ -1,0 +1,55 @@
+Pythia8_BsToJpsiPhi_Bpt5p0_Pthat0_TuneCUEP8M1_5020GeV_IDfilter_cfi_py_GEN_SIM.py
+Before Filtrer: total cross section = 1.009e+12 +- 1.672e+08 pb
+Filter efficiency (taking into account weights)= (133) / (9.2684e+06) = 1.435e-05 +- 1.244e-06
+Filter efficiency (event-level)= (133) / (9.2684e+06) = 1.435e-05 +- 1.244e-06
+After filter: final cross section = 1.448e+07 +- 1.255e+06 pb
+real    781m52.626s
+user    753m2.542s
+sys     12m26.854s
+
+Pythia8_BsToJpsiPhi_Bpt5p0_Pthat5_TuneCUEP8M1_5020GeV_IDfilter_cfi_py_GEN_SIM.py
+Before Filtrer: total cross section = 2.418e+10 +- 1.092e+07 pb
+Filter efficiency (taking into account weights)= (908) / (1.54563e+06) = 5.875e-04 +- 1.949e-05
+Filter efficiency (event-level)= (908) / (1.54563e+06) = 5.875e-04 +- 1.949e-05
+After filter: final cross section = 1.421e+07 +- 4.713e+05 pb
+real    619m58.271s
+user    613m5.494s
+sys     3m37.332s
+
+
+Pythia8_BsToJpsiPhi_Bpt5p0_Pthat10_TuneCUEP8M1_5020GeV_IDfilter_cfi_py_GEN_SIM.py
+Before Filtrer: total cross section = 2.316e+09 +- 1.384e+06 pb
+Filter efficiency (taking into account weights)= (1954) / (865185) = 2.258e-03 +- 5.103e-05
+Filter efficiency (event-level)= (1954) / (865185) = 2.258e-03 +- 5.103e-05
+After filter: final cross section = 5.230e+06 +- 1.182e+05 pb
+real    722m44.465s
+user    704m22.966s
+sys     9m36.035s
+
+Pythia8_BsToJpsiPhi_Bpt5p0_Pthat15_TuneCUEP8M1_5020GeV_IDfilter_cfi_py_GEN_SIM.py
+Before Filtrer: total cross section = 5.245e+08 +- 3.310e+05 pb
+Filter efficiency (taking into account weights)= (2631) / (765249) = 3.438e-03 +- 6.691e-05
+Filter efficiency (event-level)= (2631) / (765249) = 3.438e-03 +- 6.691e-05
+After filter: final cross section = 1.803e+06 +- 3.511e+04 pb
+real    725m24.477s
+user    718m16.311s
+sys     5m39.922s
+
+Pythia8_BsToJpsiPhi_Bpt5p0_Pthat30_TuneCUEP8M1_5020GeV_IDfilter_cfi_py_GEN_SIM.py
+Before Filtrer: total cross section = 3.460e+07 +- 2.835e+04 pb
+Filter efficiency (taking into account weights)= (2438) / (420585) = 5.797e-03 +- 1.171e-04
+Filter efficiency (event-level)= (2438) / (420585) = 5.797e-03 +- 1.171e-04
+After filter: final cross section = 2.005e+05 +- 4.053e+03 pb
+real    670m41.930s
+user    664m23.280s
+sys     4m19.400s
+
+Pythia8_BsToJpsiPhi_Bpt5p0_Pthat50_TuneCUEP8M1_5020GeV_IDfilter_cfi_py_GEN_SIM.py
+Before Filtrer: total cross section = 4.022e+06 +- 4.262e+03 pb
+Filter efficiency (taking into account weights)= (1903) / (243541) = 7.814e-03 +- 1.784e-04
+Filter efficiency (event-level)= (1903) / (243541) = 7.814e-03 +- 1.784e-04
+After filter: final cross section = 3.143e+04 +- 7.184e+02 pb
+real    647m2.853s
+user    638m58.057s
+sys     5m8.524s
+
