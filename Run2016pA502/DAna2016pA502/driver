@@ -1,0 +1,40 @@
+Official EPOS
+--pileup_input "dbs:/EPOSpPb_MinBias2510_2510_DataBS/gsfs-GEN_SIM_20170202-73d799dd1020e7860939bd5a6a3e5d51/USER instance=prod/phys03" \
+--pileup_input "dbs:/EPOSPbP_MinBias2510_2510_DataBS/gsfs-GEN_SIM_20170316-3eb1b492453e4b548acd63d24372492a/USER instance=prod/phys03" \
+
+Private EPOS
+--pileup_input "dbs:/ReggeGribovPartonMC_EposLHC_pPb_2510_2510_DataBS/pPb502Winter16GS-MB_80X_mcRun2_pA_5TeV_v4-v3/GEN-SIM" \
+--pileup_input "dbs:/ReggeGribovPartonMC_EposLHC_PbP_2510_2510_DataBS/pPb502Winter16GS-MB_80X_mcRun2_pA_5TeV_v4-v4/GEN-SIM" \
+
+Private custimized:
+pPb
+cmsDriver.py Run2016pA502/DAna2016pA502/python/NonPromptD0_D0pT-0p0_pPb-EmbEPOS_5p02_Pythia8.py \
+cmsDriver.py Run2016pA502/DAna2016pA502/python/PromptD0_D0pT-0p0_pPb-EmbEPOS_5p02_Pythia8.py \
+--pileup_input "dbs:/EPOSpPb_MinBias2510_2510_DataBS/gsfs-GEN_SIM_20170202-73d799dd1020e7860939bd5a6a3e5d51/USER instance=prod/phys03" \
+--pileup_dasoption "--limit 0" \
+--mc --eventcontent RAWSIM --pileup HiMixGEN --customise Configuration/StandardSequences/SimWithCastor_cff.py --datatier GEN-SIM --conditions 80X_mcRun2_pA_5TeV_v4 --beamspot MatchPbPBoost \
+--step GEN,SIM --scenario HeavyIons --era Run2_2016_pA -n 10000000 --no_exec
+
+Pbp
+cmsDriver.py Run2016pA502/DAna2016pA502/python/NonPromptD0_D0pT-0p0_Pbp-EmbEPOS_5p02_Pythia8.py \
+cmsDriver.py Run2016pA502/DAna2016pA502/python/PromptD0_D0pT-0p0_Pbp-EmbEPOS_5p02_Pythia8.py \
+--pileup_input "dbs:/EPOSPbP_MinBias2510_2510_DataBS/gsfs-GEN_SIM_20170316-3eb1b492453e4b548acd63d24372492a/USER instance=prod/phys03" \
+--pileup_dasoption "--limit 0" \
+--mc --eventcontent RAWSIM --pileup HiMixGEN --customise Configuration/StandardSequences/SimWithCastor_cff.py --datatier GEN-SIM --conditions 80X_mcRun2_pA_5TeV_v4 --beamspot MatchPPbBoost \
+--step GEN,SIM --scenario HeavyIons --era Run2_2016_pA -n 10000000 --no_exec
+
+pPb
+cmsDriver.py step2_pPb \
+--pileup_input "dbs:/EPOSpPb_MinBias2510_2510_DataBS/gsfs-GEN_SIM_20170202-73d799dd1020e7860939bd5a6a3e5d51/USER instance=prod/phys03" \
+--pileup_dasoption "--limit 0" \
+--mc --eventcontent RAWSIM --pileup HiMix --datatier GEN-SIM-RAW --conditions 80X_mcRun2_pA_5TeV_v4 --step DIGI,L1,DIGI2RAW,HLT:PIon --era Run2_2016_pA -n -1 --no_exec
+
+Pbp
+cmsDriver.py step2_Pbp \
+--pileup_input "dbs:/EPOSPbP_MinBias2510_2510_DataBS/gsfs-GEN_SIM_20170316-3eb1b492453e4b548acd63d24372492a/USER instance=prod/phys03" \
+--pileup_dasoption "--limit 0" \
+--mc --eventcontent RAWSIM --pileup HiMix --datatier GEN-SIM-RAW --conditions 80X_mcRun2_pA_5TeV_v4 --step DIGI,L1,DIGI2RAW,HLT:PIon --era Run2_2016_pA -n -1 --no_exec
+
+cmsDriver.py step3 \
+--mc --eventcontent AODSIM --datatier AODSIM --conditions 80X_mcRun2_pA_5TeV_v4 --customise_commands "process.bunchSpacingProducer.bunchSpacingOverride=cms.uint32(25)\n process.bunchSpacingProducer.overrideBunchSpacing=cms.bool(True)" --step RAW2DIGI,L1Reco,RECO --era Run2_2016_pA -n -1 --no_exec
+
