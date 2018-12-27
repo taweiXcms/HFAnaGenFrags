@@ -1,7 +1,8 @@
 import FWCore.ParameterSet.Config as cms
 from Configuration.Generator.Pythia8CommonSettings_cfi import *
-from Configuration.Generator.Pythia8CUEP8M1Settings_cfi import *
+from Configuration.Generator.MCTunes2017.PythiaCP5Settings_cfi import *
 from GeneratorInterface.EvtGenInterface.EvtGenSetting_cff import *
+# from Configuration.Generator.PSweightsPythia.PythiaPSweightsSettings_cfi import *
 
 # https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/BPH-RunIIFall17GS-00115/0
 
@@ -62,14 +63,16 @@ End
 	),
 	PythiaParameters = cms.PSet(
 		pythia8CommonSettingsBlock,
-		pythia8CUEP8M1SettingsBlock,
+		pythia8CP5SettingsBlock,
+        # pythia8PSweightsSettingsBlock,
 		processParameters = cms.vstring(            
 			'HardQCD:all = on',
 			'PhaseSpace:pTHatMin = 5.',					 
 		),
         parameterSets = cms.vstring(
 			'pythia8CommonSettings',
-			'pythia8CUEP8M1Settings',
+			'pythia8CP5Settings',
+            # 'pythia8PSweightsSettings',
 			'processParameters',
 		)
 	)
