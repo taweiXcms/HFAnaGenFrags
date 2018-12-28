@@ -1,7 +1,8 @@
 import FWCore.ParameterSet.Config as cms
 from Configuration.Generator.Pythia8CommonSettings_cfi import *
-from Configuration.Generator.Pythia8CUEP8M1Settings_cfi import *
+from Configuration.Generator.MCTunes2017.PythiaCP5Settings_cfi import *
 from GeneratorInterface.EvtGenInterface.EvtGenSetting_cff import *
+# from Configuration.Generator.PSweightsPythia.PythiaPSweightsSettings_cfi import *
 
 # https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/HIN-HiFall15-00038/0
 
@@ -22,7 +23,8 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
 						 ),
                          PythiaParameters = cms.PSet(
 							 pythia8CommonSettingsBlock,
-							 pythia8CUEP8M1SettingsBlock,
+							 pythia8CP5SettingsBlock,
+							 # pythia8PSweightsSettingsBlock,
 							 processParameters = cms.vstring(
 								 # 'HardQCD:all = on',
 								 'Charmonium:states(3S1) = 100443', # filter on 100443 and prevents other onium states decaying to 443, so we should turn the others off
@@ -47,7 +49,8 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
 							 ),
 							 parameterSets = cms.vstring(
 								 'pythia8CommonSettings',
-								 'pythia8CUEP8M1Settings',
+								 'pythia8CP5Settings',
+								 # 'pythia8PSweightsSettings',
 								 'processParameters',
 							 )
 						 )
