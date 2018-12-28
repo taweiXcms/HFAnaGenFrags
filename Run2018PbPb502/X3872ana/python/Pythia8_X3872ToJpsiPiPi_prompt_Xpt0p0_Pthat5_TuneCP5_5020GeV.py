@@ -1,7 +1,8 @@
 import FWCore.ParameterSet.Config as cms
 from Configuration.Generator.Pythia8CommonSettings_cfi import *
-from Configuration.Generator.Pythia8CUEP8M1Settings_cfi import *
+from Configuration.Generator.MCTunes2017.PythiaCP5Settings_cfi import *
 from GeneratorInterface.EvtGenInterface.EvtGenSetting_cff import *
+# from Configuration.Generator.PSweightsPythia.PythiaPSweightsSettings_cfi import *
 
 # https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/BPH-RunIIFall18GS-00094/0
 
@@ -14,15 +15,37 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
 							 EvtGen130 = cms.untracked.PSet(
 								 decay_table = cms.string('GeneratorInterface/EvtGenInterface/data/DECAY_2014_NOLONGLIFE.DEC'),
 								 particle_property_file = cms.FileInPath('GeneratorInterface/EvtGenInterface/data/evt_2014.pdl'),
-								 user_decay_file = cms.vstring('GeneratorInterface/ExternalDecays/data/Onia_mumu_withX3872.dec'),
+								 # user_decay_file = cms.vstring('GeneratorInterface/ExternalDecays/data/Onia_mumu_withX3872.dec'),
 								 list_forced_decays = cms.vstring('myX3872'),
+								 user_decay_embedded = cms.vstring(
+"""
+#
+Alias      MyJ/psi  J/psi
+ChargeConj MyJ/psi  MyJ/psi
+#
+Decay MyJ/psi
+  1.000         mu+       mu-            PHOTOS VLL;
+Enddecay
+#
+#
+Alias      myX3872  chi_c1
+ChargeConj myX3872  myX3872
+Particle myX3872 3.872 0.003
+#
+Decay myX3872
+  1.000         MyJ/psi      pi+     pi-          PHSP;
+Enddecay
+End
+"""
+								 ),
 								 operates_on_particles = cms.vint32()
 							 ),
 							 parameterSets = cms.vstring('EvtGen130')
 						 ),
                          PythiaParameters = cms.PSet(
 							 pythia8CommonSettingsBlock,
-							 pythia8CUEP8M1SettingsBlock,
+							 pythia8CP5SettingsBlock,
+                             # pythia8PSweightsSettingsBlock,
 							 processParameters = cms.vstring(
 								 # 'HardQCD:all = on',
 								 'Charmonium:states(3PJ) = 20443', # generating only Chi_c1 particle
@@ -41,7 +64,8 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
 							 ),
 							 parameterSets = cms.vstring(
 								 'pythia8CommonSettings',
-								 'pythia8CUEP8M1Settings',
+								 'pythia8CP5Settings',
+                                 # 'pythia8PSweightsSettings',
 								 'processParameters',
 							 )
 						 )
@@ -70,8 +94,8 @@ BJpsiDaufilter = cms.EDFilter("PythiaMomDauFilter",
     MomMinPt = cms.untracked.double(15.),
     MomMinEta = cms.untracked.double(-2.4),
     MomMaxEta = cms.untracked.double(2.4),
-    DaughterIDs = cms.untracked.vint32(443, 113),
-    NumberDaughters = cms.untracked.int32(2),
+    DaughterIDs = cms.untracked.vint32(443, 211, -211),
+    NumberDaughters = cms.untracked.int32(3),
     DaughterID = cms.untracked.int32(443),
     DescendantsIDs = cms.untracked.vint32(13, -13),
     NumberDescendants = cms.untracked.int32(2),
@@ -79,16 +103,16 @@ BJpsiDaufilter = cms.EDFilter("PythiaMomDauFilter",
     MaxEta = cms.untracked.double(2.5),
 )
 
-BX3872Daufilter = cms.EDFilter("PythiaMomDauFilter",
-    ParticleID = cms.untracked.int32(20443),
-    MomMinPt = cms.untracked.double(15.),
-    MomMinEta = cms.untracked.double(-2.4),
-    MomMaxEta = cms.untracked.double(2.4),
-    DaughterIDs = cms.untracked.vint32(443, 113),
-    NumberDaughters = cms.untracked.int32(2),
-    DaughterID = cms.untracked.int32(113),
-    DescendantsIDs = cms.untracked.vint32(211, -211),
-    NumberDescendants = cms.untracked.int32(2),
-)
+# BX3872Daufilter = cms.EDFilter("PythiaMomDauFilter",
+#     ParticleID = cms.untracked.int32(20443),
+#     MomMinPt = cms.untracked.double(15.),
+#     MomMinEta = cms.untracked.double(-2.4),
+#     MomMaxEta = cms.untracked.double(2.4),
+#     DaughterIDs = cms.untracked.vint32(443, 113),
+#     NumberDaughters = cms.untracked.int32(2),
+#     DaughterID = cms.untracked.int32(113),
+#     DescendantsIDs = cms.untracked.vint32(211, -211),
+#     NumberDescendants = cms.untracked.int32(2),
+# )
 
-ProductionFilterSequence = cms.Sequence(generator*mumugenfilter*BJpsiDaufilter*BX3872Daufilter)
+ProductionFilterSequence = cms.Sequence(generator*mumugenfilter*BJpsiDaufilter)
