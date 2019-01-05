@@ -11,16 +11,16 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
 						 pythiaHepMCVerbosity = cms.untracked.bool(False),
 						 comEnergy = cms.double(5020.0),
 						 maxEventsToPrint = cms.untracked.int32(0),
-						 ExternalDecays = cms.PSet(
-							 EvtGen130 = cms.untracked.PSet(
-								 decay_table = cms.string('GeneratorInterface/EvtGenInterface/data/DECAY_2014_NOLONGLIFE.DEC'),
-								 particle_property_file = cms.FileInPath('GeneratorInterface/EvtGenInterface/data/evt_2014.pdl'),
-								 user_decay_file = cms.vstring('GeneratorInterface/ExternalDecays/data/Onia_mumu_withX3872.dec'),
-								 list_forced_decays = cms.vstring('myX3872'),
-								 operates_on_particles = cms.vint32()
-							 ),
-							 parameterSets = cms.vstring('EvtGen130')
-						 ),
+						 # ExternalDecays = cms.PSet(
+						 # 	 EvtGen130 = cms.untracked.PSet(
+						 # 		 decay_table = cms.string('GeneratorInterface/EvtGenInterface/data/DECAY_2014_NOLONGLIFE.DEC'),
+						 # 		 particle_property_file = cms.FileInPath('GeneratorInterface/EvtGenInterface/data/evt_2014.pdl'),
+						 # 		 user_decay_file = cms.vstring('GeneratorInterface/ExternalDecays/data/Onia_mumu_withX3872.dec'),
+						 # 		 list_forced_decays = cms.vstring('myX3872'),
+						 # 		 operates_on_particles = cms.vint32()
+						 # 	 ),
+						 # 	 parameterSets = cms.vstring('EvtGen130')
+						 # ),
                          PythiaParameters = cms.PSet(
 							 pythia8CommonSettingsBlock,
 							 pythia8CP5SettingsBlock,
@@ -30,15 +30,26 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
 								 'Charmonium:states(3PJ) = 20443', # generating only Chi_c1 particle
 								 'Charmonium:O(3PJ)[3P0(1)] = 0.05', # The color-singlet long-distance matrix elements <O[3P0(1)]>/m_Q^2 for the 3PJ charmonium states
 								 'Charmonium:O(3PJ)[3S1(8)] = 0.0031', # The color-singlet long-distance matrix elements <O[3S1(8)]> for the 3PJ charmonium states.
-								 'Charmonium:gg2ccbar(3PJ)[3PJ(1)]g = on', # Colour-singlet production of 3PJ charmonium states via g g → ccbar[3PJ(1)] g. Code 411.
-								 'Charmonium:qg2ccbar(3PJ)[3PJ(1)]q = on', # Colour-singlet production of 3PJ charmonium states via q g → ccbar[3PJ(1)] q. Code 412.
-								 'Charmonium:qqbar2ccbar(3PJ)[3PJ(1)]g = on', # Colour-singlet production of 3PJ charmonium states via q qbar → ccbar[3PJ(1)] g. Code 413.
-								 'Charmonium:gg2ccbar(3PJ)[3S1(8)]g = on', # Colour-octet production of 3PJ charmonium states via g g → ccbar[3S1(8)] g. Code 414.
-								 'Charmonium:qg2ccbar(3PJ)[3S1(8)]q = on', # Colour-octet production of 3PJ charmonium states via q g → ccbar[3S1(8)] q. Code 415.
-								 'Charmonium:qqbar2ccbar(3PJ)[3S1(8)]g = on', # Colour-octet production of 3PJ charmonium states via q qbar → ccbar[3S1(8)] g. Code 416.
+								 'Charmonium:gg2ccbar(3PJ)[3PJ(1)]g = on', # Colour-singlet production of 3PJ charmonium states via g g -> ccbar[3PJ(1)] g. Code 411.
+								 'Charmonium:qg2ccbar(3PJ)[3PJ(1)]q = on', # Colour-singlet production of 3PJ charmonium states via q g -> ccbar[3PJ(1)] q. Code 412.
+								 'Charmonium:qqbar2ccbar(3PJ)[3PJ(1)]g = on', # Colour-singlet production of 3PJ charmonium states via q qbar -> ccbar[3PJ(1)] g. Code 413.
+								 'Charmonium:gg2ccbar(3PJ)[3S1(8)]g = on', # Colour-octet production of 3PJ charmonium states via g g -> ccbar[3S1(8)] g. Code 414.
+								 'Charmonium:qg2ccbar(3PJ)[3S1(8)]q = on', # Colour-octet production of 3PJ charmonium states via q g -> ccbar[3S1(8)] q. Code 415.
+								 'Charmonium:qqbar2ccbar(3PJ)[3S1(8)]g = on', # Colour-octet production of 3PJ charmonium states via q qbar -> ccbar[3S1(8)] g. Code 416.
 								 '20443:m0=3.87169',
 								 '20443:mWidth=0.0012',  
-								 '9940023:onMode=off',
+								 '20443:m0=3.87169',
+								 '20443:mWidth=0.0012',
+								 '20443:mMin=3.868',
+								 '20443:mMax=3.874',
+								 '20443:addChannel = on 1 0 443 113',
+								 '20443:onMode = off',
+								 '20443:onIfMatch = 443 113',
+								 '443:onMode = off',
+								 '443:onIfMatch = 13 -13',
+								 '113:onMode = off',
+								 '113:0:onMode = on', # channel_0 = 211 -211
+								 '113:0:bRatio = 1.0',
 								 'PhaseSpace:pTHatMin = 10.',
 							 ),
 							 parameterSets = cms.vstring(

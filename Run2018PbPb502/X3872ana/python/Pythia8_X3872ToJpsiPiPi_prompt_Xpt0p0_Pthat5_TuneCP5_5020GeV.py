@@ -11,37 +11,37 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
 						 pythiaHepMCVerbosity = cms.untracked.bool(False),
 						 comEnergy = cms.double(5020.0),
 						 maxEventsToPrint = cms.untracked.int32(0),
-						 ExternalDecays = cms.PSet(
-							 EvtGen130 = cms.untracked.PSet(
-								 decay_table = cms.string('GeneratorInterface/EvtGenInterface/data/DECAY_2014_NOLONGLIFE.DEC'),
-								 particle_property_file = cms.FileInPath('GeneratorInterface/EvtGenInterface/data/evt_2014.pdl'),
-								 # user_decay_file = cms.vstring('GeneratorInterface/ExternalDecays/data/Onia_mumu_withX3872.dec'),
-								 list_forced_decays = cms.vstring('myX3872'),
-								 user_decay_embedded = cms.vstring(
-"""
-#
-Alias      MyJ/psi  J/psi
-ChargeConj MyJ/psi  MyJ/psi
-#
-Decay MyJ/psi
-  1.000         mu+       mu-            PHOTOS VLL;
-Enddecay
-#
-#
-Alias      myX3872  chi_c1
-ChargeConj myX3872  myX3872
-Particle myX3872 3.872 0.003
-#
-Decay myX3872
-  1.000         MyJ/psi      pi+     pi-          PHSP;
-Enddecay
-End
-"""
-								 ),
-								 operates_on_particles = cms.vint32()
-							 ),
-							 parameterSets = cms.vstring('EvtGen130')
-						 ),
+# 						 ExternalDecays = cms.PSet(
+# 							 EvtGen130 = cms.untracked.PSet(
+# 								 decay_table = cms.string('GeneratorInterface/EvtGenInterface/data/DECAY_2014_NOLONGLIFE.DEC'),
+# 								 particle_property_file = cms.FileInPath('GeneratorInterface/EvtGenInterface/data/evt_2014.pdl'),
+# 								 # user_decay_file = cms.vstring('GeneratorInterface/ExternalDecays/data/Onia_mumu_withX3872.dec'),
+# 								 list_forced_decays = cms.vstring('myX3872'),
+# 								 user_decay_embedded = cms.vstring(
+# """
+# #
+# Alias      MyJ/psi  J/psi
+# ChargeConj MyJ/psi  MyJ/psi
+# #
+# Decay MyJ/psi
+#   1.000         mu+       mu-            PHOTOS VLL;
+# Enddecay
+# #
+# #
+# Alias      myX3872  chi_c1
+# ChargeConj myX3872  myX3872
+# Particle myX3872 3.872 0.003
+# #
+# Decay myX3872
+#   1.000         MyJ/psi      pi+     pi-          PHSP;
+# Enddecay
+# End
+# """
+# 								 ),
+# 								 operates_on_particles = cms.vint32()
+# 							 ),
+# 							 parameterSets = cms.vstring('EvtGen130')
+# 						 ),
                          PythiaParameters = cms.PSet(
 							 pythia8CommonSettingsBlock,
 							 pythia8CP5SettingsBlock,
@@ -58,8 +58,14 @@ End
 								 'Charmonium:qg2ccbar(3PJ)[3S1(8)]q = on', # Colour-octet production of 3PJ charmonium states via q g → ccbar[3S1(8)] q. Code 415.
 								 'Charmonium:qqbar2ccbar(3PJ)[3S1(8)]g = on', # Colour-octet production of 3PJ charmonium states via q qbar → ccbar[3S1(8)] g. Code 416.
 								 '20443:m0=3.87169',
-								 '20443:mWidth=0.0012',  
-								 '9940023:onMode=off',
+                                 '20443:mWidth=0.0012',
+                                 '20443:mMin=3.868',
+                                 '20443:mMax=3.874',
+                                 '20443:addChannel = on 1 0 443 211 -211',
+                                 '20443:onMode = off',
+                                 '20443:onIfMatch = 443 211 -211',
+                                 '443:onMode = off',
+                                 '443:onIfMatch = 13 -13',
 								 'PhaseSpace:pTHatMin = 5.',
 							 ),
 							 parameterSets = cms.vstring(
