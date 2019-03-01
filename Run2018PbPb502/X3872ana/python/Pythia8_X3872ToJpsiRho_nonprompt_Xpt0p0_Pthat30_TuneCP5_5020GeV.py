@@ -101,7 +101,7 @@ End
 								 'HardQCD:gg2bbbar    = on ',
 								 'HardQCD:qqbar2bbbar = on ',
                                  'HardQCD:hardbbbar   = on',
-								 'PhaseSpace:pTHatMin = 5.',
+								 'PhaseSpace:pTHatMin = 30.',
 							 ),
 							 parameterSets = cms.vstring(
 								 'pythia8CommonSettings',

@@ -15,7 +15,7 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
 							 EvtGen130 = cms.untracked.PSet(
 								 decay_table = cms.string('GeneratorInterface/EvtGenInterface/data/DECAY_2010.DEC'),
 								 particle_property_file = cms.FileInPath('GeneratorInterface/EvtGenInterface/data/evt.pdl'),
-								 user_decay_file = cms.vstring('GeneratorInterface/ExternalDecays/data/incl_BtoJpsi_mumu.dec'),
+								 user_decay_file = cms.vstring('GeneratorInterface/ExternalDecays/data/incl_BtoPsi2S_Jpsipipi.dec'),
 								 list_forced_decays = cms.vstring('MyB0', 
 																  'Myanti-B0',
 																  'MyB+',
@@ -35,7 +35,7 @@ generator = cms.EDFilter("Pythia8GeneratorFilter",
 								 'HardQCD:gg2bbbar    = on ',
 								 'HardQCD:qqbar2bbbar = on ',
 								 'HardQCD:hardbbbar   = on',
-								 'PhaseSpace:pTHatMin = 10.',
+								 'PhaseSpace:pTHatMin = 0.',
 							 ),
 							 parameterSets = cms.vstring(
 								 'pythia8CommonSettings',
@@ -64,16 +64,18 @@ mumugenfilter = cms.EDFilter("MCParticlePairFilter",
 							 ParticleID2 = cms.untracked.vint32(13)
 )
 
-oniafilter = cms.EDFilter("PythiaFilter",
-                          Status = cms.untracked.int32(2),
-                          MaxEta = cms.untracked.double(1000.0),
-                          MinEta = cms.untracked.double(-1000.0),
-                          MinPt = cms.untracked.double(0.0),
-                          ParticleID = cms.untracked.int32(443)
+Psi2SJpsiDaufilter = cms.EDFilter("PythiaMomDauFilter",
+								  ParticleID = cms.untracked.int32(100443),
+								  MomMinPt = cms.untracked.double(0.),
+								  MomMinEta = cms.untracked.double(-2.4),
+								  MomMaxEta = cms.untracked.double(2.4),
+								  DaughterIDs = cms.untracked.vint32(443, 211, -211),
+								  NumberDaughters = cms.untracked.int32(3),
+								  NumberDescendants = cms.untracked.int32(0),
 )
 
 bfilter = cms.EDFilter("PythiaFilter",
 					   ParticleID = cms.untracked.int32(5)
 )
 
-ProductionFilterSequence = cms.Sequence(generator*mumugenfilter*oniafilter*bfilter)
+ProductionFilterSequence = cms.Sequence(generator*mumugenfilter*Psi2SJpsiDaufilter*bfilter)
